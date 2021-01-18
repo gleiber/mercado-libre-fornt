@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 import UpdateTitleHeader from "./store/fiture/responseSearch/actions";
 import { selectActiveTitle } from "./store/fiture/responseSearch/reducer";
 import { parameterSend } from "./store/fiture/parameterSearchSend/reducer";
+import { statusRequestSearch } from "./store/fiture/statusSearch/reducer";
+import StatusRequestSearch from "./store/fiture/statusSearch/actions";
 
 class App extends Component {
   constructor(props) {
@@ -13,27 +15,28 @@ class App extends Component {
     this.state = {
       data: "",
     };
-  }
-
-  componentDidMount() {
-    this.props.UpdateTitleHeader("Motorola");
+    this.props = {
+      prev_props: this.props.data,
+    };
   }
 
   async componentDidUpdate() {
-    console.log("entro aqui en el componentDidUpdate");
-    console.log("this.props.parameterSend", this.props.parameterSend.title);
-    const requestOptions = {
-      headers: { "Content-Type": "application/json" },
-      method: "GET",
-    };
-    const fetchResponse = await fetch(
-      "http://localhost:8001/api/items?q=" + this.props.parameterSend.title,
-      requestOptions
-    );
-    const response = await fetchResponse.json();
-    console.log(response);
-    this.props.UpdateTitleHeader(response);
-    //getTags(response);
+    if (this.props.status !== true) {
+      this.props.StatusRequestSearch(true);
+
+      const requestOptions = {
+        headers: { "Content-Type": "application/json" },
+        method: "GET",
+      };
+      const fetchResponse = await fetch(
+        "http://localhost:8001/api/items?q=" + this.props.data,
+        requestOptions
+      );
+      const response = await fetchResponse.json();
+      console.log(response);
+      this.props.UpdateTitleHeader(response);
+      //getTags(response);
+    }
   }
 
   render() {
@@ -55,13 +58,12 @@ const mapStateToProps = (state) => {
   return {
     title: selectActiveTitle(state),
     data: parameterSend(state),
+    status: statusRequestSearch(state),
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    UpdateTitleHeader: () => dispatch(UpdateTitleHeader()),
-  };
-};
-
-export default connect(mapStateToProps, { UpdateTitleHeader })(App);
+export default connect(
+  mapStateToProps,
+  { UpdateTitleHeader, StatusRequestSearch }
+  //{ StatusRequestSearch }
+)(App);
