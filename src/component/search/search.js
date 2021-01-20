@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import ParameterSend from "../../store/fiture/parameterSearchSend/actions";
 import { parameterSend } from "../../store/fiture/parameterSearchSend/reducer";
 import StatusRequestSearch from "../../store/fiture/statusSearch/actions";
+import StepMenu from "../../store/fiture/step/action";
 import { statusRequestSearch } from "../../store/fiture/statusSearch/reducer";
 
 class Search extends Component {
@@ -21,6 +22,7 @@ class Search extends Component {
     this.props.ParameterSend(this.state.data);
     this.props.StatusRequestSearch(false);
     this.setState({ data: "" });
+    this.props.StepMenu(1);
   };
 
   render() {
@@ -58,6 +60,8 @@ const mapStateToProps = (state) => {
   };
 };*/
 
-export default connect(mapStateToProps, { ParameterSend, StatusRequestSearch })(
-  Search
-);
+export default connect(mapStateToProps, {
+  ParameterSend,
+  StatusRequestSearch,
+  StepMenu,
+})(Search);

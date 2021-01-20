@@ -1,13 +1,17 @@
 .App {
   text-align: center;
-  background: #ffffff;
+  background: #ebebeb;
 }
 .container {
   width: 100%;
   background: #fff159;
-  height: 100px;
+  height: 60px;
   display: flex;
   justify-content: center;
+}
+.section-result {
+  justify-content: center;
+  display: flex;
 }
 
 .App-logo {
