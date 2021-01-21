@@ -18,9 +18,11 @@ class DetailsProductComponent extends Component {
     let conditions = "";
     console.log("detailProduct", detailsProd);
     if (detailsProd !== "") {
-      console.log("entro");
-      if (detailsProd.item.condition === "new") {
-        conditions = "Nuevo";
+      console.log("detailsProd.item.condition", detailsProd);
+      if (detailsProd.item !== undefined) {
+        if (detailsProd.item.condition === "new") {
+          conditions = "Nuevo";
+        }
       }
     }
     return (
@@ -37,8 +39,8 @@ class DetailsProductComponent extends Component {
             <div className="content-title">
               <p>{conditions}</p>
               <h2 className="title-detail">{detailsProd.item.title}</h2>
-              <span class="price-tag-symbol">$</span>
-              <span class="price">{detailsProd.item.price.amount}</span>
+              <span className="price-tag-symbol">$</span>
+              <span className="price">{detailsProd.item.price.amount}</span>
               <div className="content-button">
                 <button className="button-details">Comprar</button>
               </div>

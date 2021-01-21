@@ -12,6 +12,8 @@ import DetailsProduct from "./store/fiture/responseDetailProduct/actions";
 import ParameterDetailProduct from "./store/fiture/parameterDetailProduct/actions";
 import StepMenu from "./store/fiture/step/action";
 import ChangeBreadcrum from "./store/fiture/parmeterHandlerBreadcrum/actions";
+import FirmApi from "./store/fiture/firmApi/actions";
+import { firmApi } from "./store/fiture/firmApi/reducer";
 import { changeBreadcrum } from "./store/fiture/parmeterHandlerBreadcrum/reducer";
 import { selectActiveTitle } from "./store/fiture/responseSearch/reducer";
 import { parameterSend } from "./store/fiture/parameterSearchSend/reducer";
@@ -27,7 +29,19 @@ class App extends Component {
       data: "",
     };
   }
-
+  async componentDidMount() {
+    const requestFirmApi = {
+      headers: { "Content-Type": "application/json" },
+      method: "GET",
+    };
+    const fetchResponseFirmApi = await fetch(
+      "http://localhost:8001/firmApi",
+      requestFirmApi
+    );
+    const response = await fetchResponseFirmApi.json();
+    console.log(response);
+    this.props.FirmApi(response);
+  }
   async componentDidUpdate() {
     const {
       status,
@@ -41,12 +55,20 @@ class App extends Component {
 
     if (status !== true) {
       StatusRequestSearch(true);
+      console.log();
       console.log("Paso por aqui", breadcrum);
       if (data !== null || breadcrum !== null) {
         ParameterSend(null);
+
+        const myHeaders = new Headers();
+        const Authorization = "Bearer " + this.props.firmapi.token;
+        console.log("Authorization", Authorization);
+        myHeaders.append("Authorization", Authorization);
+        myHeaders.append("Content-Type", "application/json");
         const requestOptions = {
-          headers: { "Content-Type": "application/json" },
           method: "GET",
+          headers: myHeaders,
+          redirect: "follow",
         };
         const fetchResponse = await fetch(
           "http://localhost:8001/api/items?q=" + this.props.data,
@@ -58,9 +80,16 @@ class App extends Component {
       }
       if (parmeterProduct !== null) {
         ParameterDetailProduct(null);
+
+        const myHeaders = new Headers();
+        const Authorization = "Bearer " + this.props.firmapi.token;
+        console.log("Authorization", Authorization);
+        myHeaders.append("Authorization", Authorization);
+        myHeaders.append("Content-Type", "application/json");
         const requestOptionsDetail = {
-          headers: { "Content-Type": "application/json" },
           method: "GET",
+          headers: myHeaders,
+          redirect: "follow",
         };
         const fetchResponseDetail = await fetch(
           "http://localhost:8001/api/items/" + parmeterProduct,
@@ -130,6 +159,7 @@ const mapStateToProps = (state) => {
     detailProduct: detailsProduct(state),
     steps: stepMenu(state),
     breadcrum: changeBreadcrum(state),
+    firmapi: firmApi(state),
   };
 };
 
@@ -141,4 +171,5 @@ export default connect(mapStateToProps, {
   ParameterDetailProduct,
   StepMenu,
   ChangeBreadcrum,
+  FirmApi,
 })(App);

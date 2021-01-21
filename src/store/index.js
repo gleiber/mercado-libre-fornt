@@ -6,6 +6,7 @@ import parameterDetailProductReducer from "./fiture/parameterDetailProduct/reduc
 import detailsProductReducer from "./fiture/responseDetailProduct/reducer";
 import stepMenuReducer from "./fiture/step/reducer";
 import changeBreadcrumReducer from "./fiture/parmeterHandlerBreadcrum/reducer";
+import changeFirmApiReducer from "./fiture/firmApi/reducer";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
@@ -17,6 +18,7 @@ const reducers = combineReducers({
   detailsProductReducer,
   stepMenuReducer,
   changeBreadcrumReducer,
+  changeFirmApiReducer,
 });
 
 const persistConfig = {
