@@ -18,6 +18,15 @@ class Search extends Component {
   removeAccents = (str) => {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   };
+  onFormSubmit = (e) => {
+    e.preventDefault();
+    const { data } = this.state;
+    this.props.ParameterSend(data);
+    this.props.StatusRequestSearch(false);
+    this.setState({ data: "" });
+    this.props.StepMenu(1);
+    // send to server with e.g. `window.fetch`
+  };
   handleChange = (event) => {
     const parameterSend = this.removeAccents(event.target.value);
     this.setState({ data: parameterSend });
@@ -32,20 +41,22 @@ class Search extends Component {
   render() {
     return (
       <div className="container-search">
-        <input
-          className="input-search"
-          type="text"
-          value={this.state.data}
-          placeholder="Nunca dejes de buscar"
-          onChange={this.handleChange}
-        />
-        <button className="button-search" onClick={this.handleAddTodo}>
-          <img
-            src={searchIcon}
-            className="search-icon "
-            alt="search-icon"
-          ></img>
-        </button>
+        <form onSubmit={this.onFormSubmit} className="form-content">
+          <input
+            className="input-search"
+            type="text"
+            value={this.state.data}
+            placeholder="Nunca dejes de buscar"
+            onChange={this.handleChange}
+          />
+          <button className="button-search" onClick={this.handleAddTodo}>
+            <img
+              src={searchIcon}
+              className="search-icon "
+              alt="search-icon"
+            ></img>
+          </button>
+        </form>
       </div>
     );
   }

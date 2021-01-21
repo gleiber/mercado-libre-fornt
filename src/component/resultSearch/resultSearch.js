@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 import { parameterSend } from "../../store/fiture/parameterSearchSend/reducer";
 import { statusRequestSearch } from "../../store/fiture/statusSearch/reducer";
 import StatusRequestSearch from "../../store/fiture/statusSearch/actions";
-import ParameterSend from "../../store/fiture/parameterSearchSend/actions";
 import { selectActiveTitle } from "../../store/fiture/responseSearch/reducer";
 import ParameterDetailProduct from "../../store/fiture/parameterDetailProduct/actions";
 import "./style.css";
+
 class ResultSeach extends Component {
   handleRowClick = (item) => {
     const { ParameterDetailProduct, StatusRequestSearch } = this.props;
@@ -85,7 +85,6 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  ParameterSend,
   StatusRequestSearch,
   ParameterDetailProduct,
 })(ResultSeach);
