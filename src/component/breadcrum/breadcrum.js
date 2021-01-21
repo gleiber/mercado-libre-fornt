@@ -17,8 +17,8 @@ function BreadcrumbView({
 
   const onItemClick = (id) => {
     console.log(id);
-    ChangeBreadcrum(id);
-    StatusRequestSearch(false);
+    //ChangeBreadcrum(id);
+    //StatusRequestSearch(false);
   };
 
   items.forEach(({ id, label }, index) => {
