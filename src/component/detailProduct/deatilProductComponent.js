@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { parameterSend } from "../../store/fiture/parameterSearchSend/reducer";
 import { statusRequestSearch } from "../../store/fiture/statusSearch/reducer";
-import { selectActiveTitle } from "../../store/fiture/responseSearch/reducer";
 import { detailsProduct } from "../../store/fiture/responseDetailProduct/reducer";
 import ParameterDetailProduct from "../../store/fiture/parameterDetailProduct/actions";
 import "./style.css";
@@ -58,7 +57,6 @@ const mapStateToProps = (state) => {
   return {
     data: parameterSend(state),
     status: statusRequestSearch(state),
-    title: selectActiveTitle(state),
     detailsProd: detailsProduct(state),
   };
 };

@@ -1,14 +1,15 @@
 import logo from "./images/mercado-libre.png";
 import "./App.css";
+import { connect } from "react-redux";
 import React, { Component } from "react";
 import Search from "./component/search/search";
 import ResultSeach from "./component/resultSearch/resultSearch";
 import DetailsProductComponent from "./component/detailProduct/deatilProductComponent";
 import BreadcrumbView from "./component/breadcrum/breadcrum";
-import { connect } from "react-redux";
 import UpdateTitleHeader from "./store/fiture/responseSearch/actions";
 import ParameterSend from "./store/fiture/parameterSearchSend/actions";
 import DetailsProduct from "./store/fiture/responseDetailProduct/actions";
+import StatusRequestSearch from "./store/fiture/statusSearch/actions";
 import ParameterDetailProduct from "./store/fiture/parameterDetailProduct/actions";
 import StepMenu from "./store/fiture/step/action";
 import ChangeBreadcrum from "./store/fiture/parmeterHandlerBreadcrum/actions";
@@ -18,7 +19,6 @@ import { changeBreadcrum } from "./store/fiture/parmeterHandlerBreadcrum/reducer
 import { selectActiveTitle } from "./store/fiture/responseSearch/reducer";
 import { parameterSend } from "./store/fiture/parameterSearchSend/reducer";
 import { statusRequestSearch } from "./store/fiture/statusSearch/reducer";
-import StatusRequestSearch from "./store/fiture/statusSearch/actions";
 import { parameterDetailProduct } from "./store/fiture/parameterDetailProduct/reducer";
 import { detailsProduct } from "./store/fiture/responseDetailProduct/reducer";
 import { stepMenu } from "./store/fiture/step/reducer";

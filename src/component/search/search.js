@@ -25,7 +25,6 @@ class Search extends Component {
     this.props.StatusRequestSearch(false);
     this.setState({ data: "" });
     this.props.StepMenu(1);
-    // send to server with e.g. `window.fetch`
   };
   handleChange = (event) => {
     const parameterSend = this.removeAccents(event.target.value);
