@@ -40,6 +40,10 @@
 .App-link {
   color: #61dafb;
 }
+.section-breadcrumbData {
+  display: flex;
+  padding: 10px;
+}
 
 @keyframes App-logo-spin {
   from {

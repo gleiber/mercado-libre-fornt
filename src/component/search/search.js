@@ -15,8 +15,12 @@ class Search extends Component {
       data: "",
     };
   }
+  removeAccents = (str) => {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  };
   handleChange = (event) => {
-    this.setState({ data: event.target.value });
+    const parameterSend = this.removeAccents(event.target.value);
+    this.setState({ data: parameterSend });
   };
   handleAddTodo = () => {
     this.props.ParameterSend(this.state.data);
@@ -53,12 +57,6 @@ const mapStateToProps = (state) => {
     status: statusRequestSearch(state),
   };
 };
-
-/*const mapDispatchToProps = (dispatch) => {
-  return {
-    UpdateTitleHeader: () => dispatch(UpdateTitleHeader()),
-  };
-};*/
 
 export default connect(mapStateToProps, {
   ParameterSend,

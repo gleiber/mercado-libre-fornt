@@ -4,12 +4,15 @@ import React, { Component } from "react";
 import Search from "./component/search/search";
 import ResultSeach from "./component/resultSearch/resultSearch";
 import DetailsProductComponent from "./component/detailProduct/deatilProductComponent";
+import BreadcrumbView from "./component/breadcrum/breadcrum";
 import { connect } from "react-redux";
 import UpdateTitleHeader from "./store/fiture/responseSearch/actions";
 import ParameterSend from "./store/fiture/parameterSearchSend/actions";
 import DetailsProduct from "./store/fiture/responseDetailProduct/actions";
 import ParameterDetailProduct from "./store/fiture/parameterDetailProduct/actions";
 import StepMenu from "./store/fiture/step/action";
+import ChangeBreadcrum from "./store/fiture/parmeterHandlerBreadcrum/actions";
+import { changeBreadcrum } from "./store/fiture/parmeterHandlerBreadcrum/reducer";
 import { selectActiveTitle } from "./store/fiture/responseSearch/reducer";
 import { parameterSend } from "./store/fiture/parameterSearchSend/reducer";
 import { statusRequestSearch } from "./store/fiture/statusSearch/reducer";
@@ -30,6 +33,7 @@ class App extends Component {
       status,
       StatusRequestSearch,
       data,
+      breadcrum,
       ParameterSend,
       parmeterProduct,
       ParameterDetailProduct,
@@ -37,7 +41,8 @@ class App extends Component {
 
     if (status !== true) {
       StatusRequestSearch(true);
-      if (data !== null) {
+      console.log("Paso por aqui", breadcrum);
+      if (data !== null || breadcrum !== null) {
         ParameterSend(null);
         const requestOptions = {
           headers: { "Content-Type": "application/json" },
@@ -70,7 +75,24 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props.steps);
+    const { title } = this.props;
+    let BreadcrumbData = [
+      {
+        id: "",
+        label: "",
+      },
+    ];
+    if (title !== "") {
+      if (title.categories != null) {
+        BreadcrumbData.shift();
+        title.categories.forEach((element) => {
+          BreadcrumbData.push({
+            id: element,
+            label: element,
+          });
+        });
+      }
+    }
     return (
       <div className="App">
         <section className="container">
@@ -78,6 +100,9 @@ class App extends Component {
             <img src={logo} className="App-logo " alt="logo" />
             <Search />
           </div>
+        </section>
+        <section className="section-breadcrumbData">
+          <BreadcrumbView items={BreadcrumbData} />
         </section>
         {this.props.steps === 0 && <section className="inicio"></section>}
         {this.props.steps === 1 && (
@@ -104,6 +129,7 @@ const mapStateToProps = (state) => {
     parmeterProduct: parameterDetailProduct(state),
     detailProduct: detailsProduct(state),
     steps: stepMenu(state),
+    breadcrum: changeBreadcrum(state),
   };
 };
 
@@ -114,4 +140,5 @@ export default connect(mapStateToProps, {
   DetailsProduct,
   ParameterDetailProduct,
   StepMenu,
+  ChangeBreadcrum,
 })(App);

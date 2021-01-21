@@ -60,6 +60,9 @@
 #students tr:nth-child(even) {
   background-color: #ffffff;
 }
+.tr-row {
+  cursor: pointer;
+}
 
 #students tr:hover {
   background-color: #ffffff;

@@ -28,7 +28,11 @@ class DetailsProductComponent extends Component {
         <div className="content-details">
           <div className="content-section-detail">
             <div className="content-img-detail">
-              <img src={detailsProd.item.picture} className="img-detail " />
+              <img
+                src={detailsProd.item.picture}
+                alt=""
+                className="img-detail "
+              />
             </div>
             <div className="content-title">
               <p>{conditions}</p>
