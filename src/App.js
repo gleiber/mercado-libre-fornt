@@ -22,6 +22,7 @@ import { statusRequestSearch } from "./store/fiture/statusSearch/reducer";
 import { parameterDetailProduct } from "./store/fiture/parameterDetailProduct/reducer";
 import { detailsProduct } from "./store/fiture/responseDetailProduct/reducer";
 import { stepMenu } from "./store/fiture/step/reducer";
+
 class App extends Component {
   constructor(props) {
     super(props);
