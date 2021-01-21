@@ -8,7 +8,6 @@ import ParameterDetailProduct from "../../store/fiture/parameterDetailProduct/ac
 import "./style.css";
 class DetailsProductComponent extends Component {
   handleRowClick = (item) => {
-    console.log(item.id);
     const { ParameterDetailProduct, StatusRequestSearch } = this.props;
     ParameterDetailProduct(item.id);
     StatusRequestSearch(false);
@@ -16,9 +15,7 @@ class DetailsProductComponent extends Component {
   render() {
     const { detailsProd } = this.props;
     let conditions = "";
-    console.log("detailProduct", detailsProd);
     if (detailsProd !== "") {
-      console.log("detailsProd.item.condition", detailsProd);
       if (detailsProd.item !== undefined) {
         if (detailsProd.item.condition === "new") {
           conditions = "Nuevo";
@@ -58,7 +55,6 @@ class DetailsProductComponent extends Component {
   }
 }
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     data: parameterSend(state),
     status: statusRequestSearch(state),

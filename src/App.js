@@ -39,7 +39,7 @@ class App extends Component {
       requestFirmApi
     );
     const response = await fetchResponseFirmApi.json();
-    console.log(response);
+
     this.props.FirmApi(response);
   }
   async componentDidUpdate() {
@@ -55,14 +55,11 @@ class App extends Component {
 
     if (status !== true) {
       StatusRequestSearch(true);
-      console.log();
-      console.log("Paso por aqui", breadcrum);
       if (data !== null || breadcrum !== null) {
         ParameterSend(null);
 
         const myHeaders = new Headers();
         const Authorization = "Bearer " + this.props.firmapi.token;
-        console.log("Authorization", Authorization);
         myHeaders.append("Authorization", Authorization);
         myHeaders.append("Content-Type", "application/json");
         const requestOptions = {
@@ -75,7 +72,6 @@ class App extends Component {
           requestOptions
         );
         const response = await fetchResponse.json();
-        console.log(response);
         this.props.UpdateTitleHeader(response);
       }
       if (parmeterProduct !== null) {
@@ -83,7 +79,6 @@ class App extends Component {
 
         const myHeaders = new Headers();
         const Authorization = "Bearer " + this.props.firmapi.token;
-        console.log("Authorization", Authorization);
         myHeaders.append("Authorization", Authorization);
         myHeaders.append("Content-Type", "application/json");
         const requestOptionsDetail = {
@@ -96,7 +91,6 @@ class App extends Component {
           requestOptionsDetail
         );
         const responseDetail = await fetchResponseDetail.json();
-        console.log(" responseDetail", responseDetail);
         this.props.DetailsProduct(responseDetail);
         this.props.StepMenu(2);
       }
@@ -150,7 +144,6 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     title: selectActiveTitle(state),
     data: parameterSend(state),

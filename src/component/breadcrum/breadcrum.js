@@ -16,7 +16,6 @@ function BreadcrumbView({
   let itemBreadcrumd = [];
 
   const onItemClick = (id) => {
-    console.log(id);
     //ChangeBreadcrum(id);
     //StatusRequestSearch(false);
   };

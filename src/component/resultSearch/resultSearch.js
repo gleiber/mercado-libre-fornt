@@ -9,13 +9,11 @@ import ParameterDetailProduct from "../../store/fiture/parameterDetailProduct/ac
 import "./style.css";
 class ResultSeach extends Component {
   handleRowClick = (item) => {
-    console.log(item.id);
     const { ParameterDetailProduct, StatusRequestSearch } = this.props;
     ParameterDetailProduct(item.id);
     StatusRequestSearch(false);
   };
   renderTableData() {
-    console.log(this.props.title);
     const { title } = this.props;
     if (this.props.title !== "") {
       if (title.items != null) {

@@ -1,7 +1,6 @@
 const initialState = { breadcrum: "" };
 
 export default (state = initialState, action) => {
-  console.log(action);
   if (action.type === "CHANGE_BREADCRUM") {
     return {
       ...state,
